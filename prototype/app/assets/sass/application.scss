@@ -88,3 +88,32 @@ a:hover {
     height: 1px;
     overflow: hidden;
 }
+
+
+.document-list__item-title {
+    font-size: 19px;
+    line-height: 1.3157894737;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.document-list__item {
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid 
+    #b1b4b6;
+    list-style: none;
+}
+.document-list {
+    color: 
+    #0b0c0c;
+    font-family: "nta", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0;
+    padding: 0;
+}
