@@ -35,6 +35,54 @@ var uri = API_URI+searchType+'/en-GB/^/^/DISTANCE/0/^/'+lat+'/'+long+'/1/90/'+fo
 var locations = [];
 
 
+var sampleResults = [
+  { 
+    title:"AD:VENTURE - Leeds City Region",
+    description:"Provides free business development support and guidance."
+  },
+  { 
+    title:"Agri-tech Cornwall - Cornwall and the Isles of Scilly",
+    description:"Grants and support to increase research, development and innovation in agritech."
+  },
+  { 
+    title:"ART Business Loans - West Midlands",
+    description:"Loans for new and existing small businesses to create and safeguard jobs in the West Midlands"
+  },
+  { 
+    title:"Arts University Bournemouth Innovation Vouchers",
+    description:"Vouchers to access external expertise, facilities and equipment to help your business innovate and grow."
+  },
+  { 
+    title:"BCRS Business Loans",
+    description:"Loans to help small and medium-sized businesses develop and grow."
+  },
+  { 
+    title:"Be inspired at Staffordshire University",
+    description:"Offers free support and guidance for graduates of any university in England, Scotland, Wales and Northern Ireland to start a business in Staffordshire."
+  },
+  { 
+    title:"Better Business Finance - UK",
+    description:"Free, quick and easy access to a directory of approved finance suppliers for UK businesses."
+  },
+  { 
+    title:"Big Issue Invest - UK",
+    description:"Big Issue Invest helps social enterprises and charities by providing loans and investments."
+  },
+  { 
+    title:"Business advice and masterclasses - East of England",
+    description:"Advice, workshops, loans and innovation grant services for start-up and trading businesses in Cambridgeshire, Essex, Norfolk and Suffolk"
+  },  
+  { 
+    title:"Business Cash Advance - UK",
+    description:"Alternative financing for UK small business owners."
+  },  
+  { 
+    title:"Business Development Grant Scheme – Scarborough",
+    description:"Grants to help new start-up and established SMEs looking to grow or relocate to the Borough of Scarborough."
+  }
+  
+  ];
+
 router.get('/', function(req, res, next) {
   res.render('index', {  });
 });
@@ -48,6 +96,12 @@ router.get('/error', function(req, res, next) {
 
 router.get('/results', function(req, res, next) {
 
+
+  res.render('results', {
+    results: sampleResults
+  });
+
+/* 
   console.log(uri);
     request(uri, {
       method: "GET",
@@ -79,38 +133,10 @@ router.get('/results', function(req, res, next) {
             res.redirect('/error');
           }
       });
-
+ */
 });
 
-/*
 
-{ FHRSID: '428179',
-  LocalAuthorityBusinessID: '01888/0016/0/000',
-  BusinessName: 'Starbucks Coffee Company',
-  BusinessType: 'Restaurant/Cafe/Canteen',
-  BusinessTypeID: '1',
-  AddressLine1: '16-18 Palmer Street',
-  AddressLine2: 'London',
-  AddressLine3: null,
-  AddressLine4: null,
-  PostCode: 'SW1H 0AD',
-  RatingValue: '5',
-  RatingKey: 'fhrs_5_en-gb',
-  RightToReply: null,
-  RatingDate: '17 September 2019',
-  LocalAuthorityCode: '533',
-  LocalAuthorityName: 'Westminster',
-  LocalAuthorityWebSite: 'http://www.westminster.gov.uk/',
-  LocalAuthorityEmailAddress: 'foodsafety@westminster.gov.uk',
-  Scores:
-   { Hygiene: '5', Structural: '5', ConfidenceInManagement: '5' },
-  SchemeType: 'FHRS',
-  NewRatingPending: 'false',
-  Geocode: { Longitude: '-0.135026', Latitude: '51.49898' },
-  Distance: '0.00175345677' }
-
-
-*/
 router.get('/business/:reference', function(req, res) {
   var refID  = req.params.reference;
   var target = {};

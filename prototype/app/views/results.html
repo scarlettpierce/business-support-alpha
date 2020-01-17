@@ -1,11 +1,9 @@
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
-
-
-{% extends "layout_unbranded.html" %}
+{% extends "layout.html" %}
 
 {% block pageTitle %}
-  Food Hygiene Ratings
+Finance and support for your business
 {% endblock %}
 
 {% block header %}
@@ -15,59 +13,63 @@
 
 {% block beforeContent %}
 {{ super() }}
-  <div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-back-link" href="javascript: window.history.go(-1)">Back</a>
-      </li>
-    </ol>
-  </div>
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="https://www.gov.uk">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="#">Business and self-employed</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link">Growing your business</a>
+    </li>
+  </ol>
+</div>
 {% endblock %}
 
 {% block content %}
 
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column">
 
+    <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
-        Food Hygiene Ratings for<br/>{{ address | upper}}
+        Finance and support for your business
       </h1>
 
-{% if not location.length %}
-<p>No properties found for that postcode</p>
 
-{% else %}
-<p>Please click on an address below to view the business details:</p>
-
-<table class="govuk-table">
-  <caption class="govuk-table__caption">{{location.length}} Properties</caption>
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th class="govuk-table__header" scope="col">Name</th>
-      <th class="govuk-table__header" scope="col">Address</th>
-      <th class="govuk-table__header" scope="col">Rating<br/>(click for data)</th>
-      <th class="govuk-table__header" scope="col">Date</th>
-    </tr>
-  </thead>
-
-  <tbody class="govuk-table__body">
-
-    {% for item in location %}
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="row">
-          <a href="https://ratings.food.gov.uk/business/{{item.FHRSID}}">{{item.BusinessName}}</a>
-        </th>
-          <td class="govuk-table__cell">{{item.AddressLine1+",  "+item.AddressLine2+", "+item.PostCode}}</td>
-          <td class="govuk-table__cell"><a href="business/{{item.FHRSID}}">{{item.RatingValue}}</a></td>
-          <td class="govuk-table__cell">{{item.RatingDate}}</td>
-        </tr>
-    {% endfor %}
-
-  </tbody>
-</table>
- {% endif %}
     </div>
-
-
+    <div class="govuk-grid-column-one-third">
+      <a href='#'>Apply for a Start Up Loan for your business</a>
+    </div>
   </div>
+
+  
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <h3 class="govuk-caption-l" >Search</h3">
+
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      {% if not results.length %}
+      <p>No results found</p>
+
+      {% else %}
+      <p>Details:</p>
+      <ul>
+        
+        {% for item in results %}
+        <li class="document-list__item">
+          <a class="document-list__item-title  document-list__item-link"  href="#">{{item.title}}</a>
+          <p class="document-list__item-description">{{item.description}}</p>
+        </li>
+        {% endfor %}
+        
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+
+
+
 {% endblock %}
