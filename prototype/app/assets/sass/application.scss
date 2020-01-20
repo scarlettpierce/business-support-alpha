@@ -170,7 +170,13 @@ a:hover {
     fill: 
     #0b0c0c;
 }
-
+.app-c-option-select {
+    position: relative;
+    padding: 0 0 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid 
+    #b1b4b6;
+}
 .app-c-option-select__heading {
     position: relative;
     padding: 10px 8px 5px 43px;
@@ -200,4 +206,33 @@ a:hover {
 .app-c-option-select__container {
     height: 280px;
     overflow-y: scroll;
+}
+.checkboxes__legend--hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+}
+.govuk-checkboxes--small .govuk-checkboxes__label {
+    padding: 11px 15px 10px 1px;
+}
+.govuk-checkboxes--small .govuk-checkboxes__label {
+    margin-top: -2px;
+    padding: 13px 15px 13px 1px;
+    float: left;
+}
+.govuk-checkboxes__label {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 8px 15px 5px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }
