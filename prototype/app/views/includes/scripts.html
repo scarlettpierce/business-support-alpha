@@ -10,3 +10,35 @@
 {% if useAutoStoreData %}
   <script src="/public/javascripts/auto-store-data.js"></script>
 {% endif %}
+
+<script>
+  // on checkbox click update the URL
+  //https://www.gov.uk/business-finance-support
+  //?types_of_support[]=finance&types_of_support[]=equity
+  	
+	$("input[type='checkbox']").change(function(){
+
+    var isChecked = $(this).prop('checked');
+    if(isChecked){
+      // add to filter
+      console.log( this.name, this.value, isChecked );
+      window.location.href += "&"+ this.name + "=" + this.value;
+    }else{
+      //remove from filter
+    }
+
+
+	});
+
+  
+  //  toggle search filters 
+  $(".app-c-option-select__button").click(function(){
+    //console.log( this );
+    console.log( this.id );
+
+  });
+
+  // on load; get all the check boxes and update based on filters
+
+</script>
+

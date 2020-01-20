@@ -4,35 +4,6 @@ const request = require('request');
 const _ = require('underscore');
 
 
-const API_URI = 'https://ratings.food.gov.uk/';
-
-var format = 'json';
-var sortOrder = 'Alpha';
-
-/*
-// general search
-var searchType = 'search';
-var nameStr = 'cafe';
-var addressStr = 'strutton ground';
-var uri = API_URI+nameStr+'/'+addressStr+'/'+format+'/';
-*/
-
-// search address
-var searchType = 'search-address';
-var addressStr = 'wilton road, london, sw1v';
-var postcode = 'SW1H';
-var uri = API_URI+searchType+'/'+addressStr+'/1/50/'+format+'/';
-
-/*
-// search by coords
-var searchType = 'enhanced-search';
-var addressStr = 'petty france using co-ordinates';
-var lat = -0.135; // 3dp = aprox 350 ft
-var long = 51.499;
-var uri = API_URI+searchType+'/en-GB/^/^/DISTANCE/0/^/'+lat+'/'+long+'/1/90/'+format+'/';
-*/
-
-var locations = [];
 
 
 var sampleResults = [
@@ -96,9 +67,34 @@ router.get('/error', function(req, res, next) {
 
 router.get('/results', function(req, res, next) {
 
+  //console.log(req)
+  // console.log(req.originalUrl);
+  // console.log(req.query);
+  // console.log(req._parsedUrl);
+  // console.log(req._parsedUrl.Url);
+  // console.log(req._parsedUrl.query);
+  //get the filter params
+  var params = req._parsedUrl.query.split("&");
+  //console.log(params);
+  var checks = {};
+  var len = params.length;
+
+  // loop through params and split out type and values
+  // will id check boxes by id eg 'id="types_of_support-finance"'
+  for (var i=0;i<len;i++){
+    var str = params[i];
+    console.log(str)
+    str = str.split("[]=").join("-");
+    console.log(str);
+    checks[str] = true;
+    //checks.push({str:'true', name:str, checked:true});
+  }
+  console.log(checks)
+  // then pass these to the pages to render checks and facets/chips
 
   res.render('results', {
-    results: sampleResults
+    results: sampleResults,
+    checks: checks
   });
 
 /* 
