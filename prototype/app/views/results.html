@@ -57,7 +57,9 @@ Finance and support for your business
       <p>No results found</p>
 
       {% else %}
-      <p>Details:</p>
+      {% include "includes/facets.html" %}
+
+
       <ol class="document-list">
         
         {% for item in results %}
