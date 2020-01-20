@@ -73,69 +73,66 @@
                   <legend class="govuk-fieldset__legend govuk-fieldset__legend--m checkboxes__legend--hidden">Type of
                     support</legend>
 
-
-
-
                   <ul class="govuk-checkboxes checkboxes__list">
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-finance" value="finance"
                         class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Finance" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-finance"
+                        aria-controls="js-search-results-info" 
+                        {{ checked if checks['types_of_support-finance'] }}
+                        ><label for="types_of_support-finance"
                         class="govuk-label govuk-checkboxes__label">Finance</label>
-
-
                     </li>
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-equity" value="equity"
                         class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Equity" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-equity"
+                        aria-controls="js-search-results-info"
+                        {{ checked if checks['types_of_support-equity'] }}
+                        ><label for="types_of_support-equity"
                         class="govuk-label govuk-checkboxes__label">Equity</label>
-
-
                     </li>
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-grant" value="grant"
                         class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Grant" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-grant"
+                        aria-controls="js-search-results-info"
+                        {{ checked if checks['types_of_support-grant'] }}
+                        ><label for="types_of_support-grant"
                         class="govuk-label govuk-checkboxes__label">Grant</label>
-
-
                     </li>
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-loan" value="loan"
                         class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Loan" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-loan"
+                        aria-controls="js-search-results-info"
+                        {{ checked if checks['types_of_support-loan'] }}>
+                        <label for="types_of_support-loan"
                         class="govuk-label govuk-checkboxes__label">Loan</label>
-
-
                     </li>
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-expertise-and-advice"
                         value="expertise-and-advice" class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Expertise and advice" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-expertise-and-advice"
+                        aria-controls="js-search-results-info"
+                        {{ checked if checks['types_of_support-expertise-and-advice'] }}>
+                        <label for="types_of_support-expertise-and-advice"
                         class="govuk-label govuk-checkboxes__label">Expertise and advice</label>
-
-
                     </li>
                     <li class="govuk-checkboxes__item">
                       <input type="checkbox" name="types_of_support[]" id="types_of_support-recognition-award"
                         value="recognition-award" class="govuk-checkboxes__input" data-track-category="filterClicked"
                         data-uncheck-track-category="filterRemoved" data-track-action="Type of support"
                         data-track-label="Recognition awards" data-controls="js-search-results-info"
-                        aria-controls="js-search-results-info"><label for="types_of_support-recognition-award"
+                        aria-controls="js-search-results-info"
+                        {{ checked if checks['types_of_support-recognition-award'] }}>
+                        <label for="types_of_support-recognition-award"
                         class="govuk-label govuk-checkboxes__label">Recognition awards</label>
-
-
                     </li>
                   </ul>
                 </fieldset>
