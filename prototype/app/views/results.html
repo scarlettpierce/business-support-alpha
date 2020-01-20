@@ -47,8 +47,10 @@ Finance and support for your business
   
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-      <h3 class="govuk-caption-l" >Search</h3">
-
+      <label for="finder-keyword-search" class="search__label">
+        Search <span class="govuk-visually-hidden">Finance and support for your business</span>
+      </label>
+        {% include "includes/filter.html" %}
     </div>
     <div class="govuk-grid-column-two-thirds">
       {% if not results.length %}
