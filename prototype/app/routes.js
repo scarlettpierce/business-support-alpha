@@ -4,7 +4,24 @@ const request = require('request');
 const _ = require('underscore');
 
 
-
+var types = [
+  null,
+  "Finance",
+  "Equity",
+  "Grant",
+  "Loan",
+  "Expertise and advice",
+  "Recognition award" 
+];
+/*
+https://www.gov.uk/business-finance-support?
+types_of_support%5B%5D=finance
+&types_of_support%5B%5D=equity
+&types_of_support%5B%5D=grant
+&types_of_support%5B%5D=loan
+&types_of_support%5B%5D=expertise-and-advice
+&types_of_support%5B%5D=recognition-award
+*/
 
 var sampleResults = [
   { 
@@ -63,43 +80,48 @@ router.get('/error', function(req, res, next) {
   res.render('error', { content : {error: {message: "Internal server error"}}});
 });
 
+router.get('/business-stage', function(req, res, next) {
+
+  
+  res.render('business-stage', 
+  {  });
+});
 
 
 router.get('/results', function(req, res, next) {
-
-  //console.log(req)
-  // console.log(req.originalUrl);
-  // console.log(req.query);
-  // console.log(req._parsedUrl);
-  // console.log(req._parsedUrl.Url);
-  // get the filter params
-  // console.log("------------");
-  // console.log(req._parsedUrl.query);
-  //console.log(req.query["types_of_support"]);
-
+  
+/* 
   var params = req._parsedUrl.query;
   if(params){
     params = "?" + params.split("[]").join("%5B%5D");
   }else{
     params ="?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity&types_of_support%5B%5D=grant";
   }
-  //types_of_support[]
-  //https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity&types_of_support%5B%5D=grant
-  // redirect to GOV>UK fund finder
+  */
+  var params = "";
+  var typeOfSupport = req.session.data['typeOfSupport'];
+  var typeArray = []
+  if(typeOfSupport){
+    for (var i=0;i<typeOfSupport.length;i++){
+      typeArray[i] = types[typeOfSupport[i]].toLowerCase().split(" ").join("-");
+      if (i===0){
+        params = "?";
+      }else{
+        params += "&"; 
+      }
+      params += "types_of_support%5B%5D=" + typeArray[i];
+    }
+    
+  }
+  console.log(params)
+   // redirect to GOV>UK fund finder
   var url  = "https://www.gov.uk/business-finance-support"+ params;
   
   console.log("redirect to " + url);
   res.redirect(302, url);
   
-  // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity
-  // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
-  // http://localhost:3000/results?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
-  // http://localhost:3000/test?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
-  // 
-
-
 });
-  /////////////////////////////////////////////////////////////
+
 
 
 router.get('/test', function(req, res, next) {
