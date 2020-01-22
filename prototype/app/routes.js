@@ -69,70 +69,64 @@ router.get('/results', function(req, res, next) {
 
   //console.log(req)
   // console.log(req.originalUrl);
-  // console.log(req.query);
+   console.log(req.query);
   // console.log(req._parsedUrl);
   // console.log(req._parsedUrl.Url);
-  // console.log(req._parsedUrl.query);
   //get the filter params
-  var params = req._parsedUrl.query.split("&");
+  console.log("------------");
+  console.log(req._parsedUrl.query);
+  //console.log(req.query["types_of_support"]);
+
+  var params = req._parsedUrl.query;
+  if(params){
+    params = params.split("[]").join("%5B%5D");
+  }
+  // redirect to GOV>UK fund finder
+  var url  = "https://www.gov.uk/business-finance-support?"+ params;
+  
+  console.log (url);
+  res.redirect(301, url);
+  
+  // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity
+  // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
+  // http://localhost:3000/results?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
+  // 
+  /////////////////////////////////////////////////////////////
+  /*
+  var len;
+
+  if(params){
+    params = params.split("&");
+    len = params.length;
+  }
+
+
   //console.log(params);
   var checks = {};
-  var len = params.length;
 
   // loop through params and split out type and values
   // will id check boxes by id eg 'id="types_of_support-finance"'
   for (var i=0;i<len;i++){
     var str = params[i];
-    console.log(str)
+    //console.log(str)
     str = str.split("[]=").join("-");
-    console.log(str);
+    //console.log(str);
     checks[str] = true;
     //checks.push({str:'true', name:str, checked:true});
   }
-  console.log(checks)
-  // then pass these to the pages to render checks and facets/chips
 
+  // then pass these to the pages to render checks and facets/chips
   res.render('results', {
     results: sampleResults,
     checks: checks
   });
-
-/* 
-  console.log(uri);
-    request(uri, {
-      method: "GET",
-      headers: {
-          'x-api-version': '2',
-          'Accept': 'application/json'
-        }
-      }, function (error, response, body) {
-
-          if (!error && response.statusCode == 200) {
-            if(body) {
-              dataset = JSON.parse(body);
-              console.log(dataset);
-              locations = dataset.FHRSEstablishment.EstablishmentCollection.EstablishmentDetail;
-              //console.log(locations[0]);
-
-              res.render('results', {
-                address: addressStr,
-                location: locations
-              });
-
-            } else {
-              res.render('results', {
-                address: addressStr,
-                location: []
-              });
-            }
-          } else {
-            res.redirect('/error');
-          }
-      });
  */
+
 });
 
 
+/*
+// example request with params
 router.get('/business/:reference', function(req, res) {
   var refID  = req.params.reference;
   var target = {};
@@ -146,7 +140,8 @@ router.get('/business/:reference', function(req, res) {
 
   })
   res.send({target});
-});
+}); 
+*/
 
 
 

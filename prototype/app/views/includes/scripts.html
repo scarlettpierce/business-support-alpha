@@ -22,7 +22,13 @@
     if(isChecked){
       // add to filter
       console.log( this.name, this.value, isChecked );
-      window.location.href += "&"+ this.name + "=" + this.value;
+      //check for first item
+      if (window.location.href.indexOf("?")>-1){
+        window.location.href += "&"+ this.name + "=" + this.value;
+      }else{
+        window.location.href += "?"+ this.name + "=" + this.value;
+
+      }
     }else{
       //remove from filter
     }
