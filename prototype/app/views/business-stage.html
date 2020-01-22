@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="business-size">
+
+        <div class="govuk-form-group">
+        
+          <fieldset class="govuk-fieldset">
+          
+          <legend class="govuk-fieldset__legend govuk-label--xl">
+            <h1 class="govuk-fieldset__heading">
+              <span class="govuk-caption-xl">Business Growth</span> What is the stage is your business?
+            </h1>
+          </legend>
+          
+        
+          <div class="govuk-radios">
+            
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="businessStage-1" name="businessStage" type="radio" value="1">
+              <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-1">
+                Not yet trading
+              </label>
+            </div>
+            
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="businessStage-2" name="businessStage" type="radio" value="2">
+              <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-2">
+                Start-ups (1-2 years trading)
+              </label>
+            </div>
+            
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="businessStage-3" name="businessStage" type="radio" value="3">
+              <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-3">
+                Established
+              </label>
+            </div>
+            
+
+          </div>
+          </fieldset>
+        
+        
+        </div>
+        
+        <button type="submit" class="govuk-button" id="submit">
+          Continue
+        </button>
+        
+        </form>
+
+
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}

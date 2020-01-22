@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="business-stage">
+<div class="govuk-form-group">
+
+    <fieldset class="govuk-fieldset">
+    
+    <legend class="govuk-fieldset__legend govuk-label--xl">
+      <h1 class="govuk-fieldset__heading">
+        <span class="govuk-caption-xl">Business Growth</span> What type of support do you need?
+      </h1>
+    </legend>
+    
+  
+    <div class="govuk-checkboxes">
+
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-1" name="typeOfSupport" type="checkbox" value="1">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-1">
+          Finance
+        </label>
+      </div>
+
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-2" name="typeOfSupport" type="checkbox" value="2">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-2">
+          Equity
+        </label>
+      </div>
+      
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-3" name="typeOfSupport" type="checkbox" value="3">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-3">
+          Grant
+        </label>
+      </div>
+      
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-4" name="typeOfSupport" type="checkbox" value="4">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-4">
+          Loan
+        </label>
+      </div>
+      
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-5" name="typeOfSupport" type="checkbox" value="5">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-5">
+          Expertise and advice
+        </label>
+      </div>
+      
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="typeOfSupport-6" name="typeOfSupport" type="checkbox" value="6">
+        <label class="govuk-label govuk-checkboxes__label govuk-label--s" for="typeOfSupport-6">
+          Recognition awards
+        </label>
+      </div>
+            
+    </div>
+    </fieldset>
+  
+  </div>
+
+  <button type="submit" class="govuk-button" id="submit">
+    Continue
+  </button>
+  
+  </form>
+
+
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}

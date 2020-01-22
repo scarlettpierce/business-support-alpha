@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="results">
+    <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+        
+        <legend class="govuk-fieldset__legend govuk-label--xl">
+          <h1 class="govuk-fieldset__heading">
+            <span class="govuk-caption-xl">Business Growth</span> Where is your business based?
+          </h1>
+        </legend>
+        
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-1" name="region" type="radio" value="East Midlands">
+            <label class="govuk-label govuk-radios__label" for="region-1">
+              East Midlands
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-2" name="region" type="radio" value="Eastern">
+            <label class="govuk-label govuk-radios__label" for="region-2">
+              Eastern
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-3" name="region" type="radio" value="London">
+            <label class="govuk-label govuk-radios__label" for="region-3">
+              London
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-4" name="region" type="radio" value="North East">
+            <label class="govuk-label govuk-radios__label" for="region-4">
+              North East
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-5" name="region" type="radio" value="North West">
+            <label class="govuk-label govuk-radios__label" for="region-5">
+              North West
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-6" name="region" type="radio" value="Northern Ireland">
+            <label class="govuk-label govuk-radios__label" for="region-6">
+              Northern Ireland
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-7" name="region" type="radio" value="Scotland">
+            <label class="govuk-label govuk-radios__label" for="region-7">
+              Scotland
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-8" name="region" type="radio" value="South East">
+            <label class="govuk-label govuk-radios__label" for="region-8">
+              South East
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-9" name="region" type="radio" value="South West">
+            <label class="govuk-label govuk-radios__label" for="region-9">
+              South West
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-10" name="region" type="radio" value="Wales">
+            <label class="govuk-label govuk-radios__label" for="region-10">
+              Wales
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="region-11" name="region" type="radio" value="Yorkshire and the Humber">
+            <label class="govuk-label govuk-radios__label" for="region-11">
+              Yorkshire and the Humber
+            </label>
+          </div>
+          
+        </div>
+        </fieldset>
+      
+      </div>
+
+      <button type="submit" class="govuk-button" id="submit">
+        Continue
+      </button>
+      
+      </form>
+      
+      
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}

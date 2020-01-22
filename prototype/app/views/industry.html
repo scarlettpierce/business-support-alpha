@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page example
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="region">
+    <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--xl" for="industryType">
+            <span class="govuk-caption-xl">Business Growth</span> What type of work does your business do?
+          </label>
+          
+        </h1>
+      
+      
+        <select class="govuk-select" id="industryType" name="industryType">
+        
+          <option value=""></option>     
+          <option value="1">Agriculture and food</option>     
+          <option value="2">Business and finance</option>     
+          <option value="3">Construction</option>     
+          <option value="4">Education</option>     
+          <option value="5">Health</option>     
+          <option value="6">Hospitality and catering</option>     
+          <option value="7">IT, digital and creative</option>     
+          <option value="8">Life Sciences</option>     
+          <option value="9">Manufacturing</option>     
+          <option value="10">Mining</option>     
+          <option value="11">Real estate and property</option>     
+          <option value="12">Science and technology</option>     
+          <option value="13">Service industries</option>     
+          <option value="14">Transport and distribution</option>     
+          <option value="15">Travel and leisure</option>     
+          <option value="16">Utilities providers</option>     
+          <option value="17">Wholesale and retail</option>
+        
+        </select>
+      </div>
+
+      <button type="submit" class="govuk-button" id="submit">
+        Continue
+      </button>
+      
+      </form>
+      
+      
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}
