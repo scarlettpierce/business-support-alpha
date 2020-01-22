@@ -69,24 +69,26 @@ router.get('/results', function(req, res, next) {
 
   //console.log(req)
   // console.log(req.originalUrl);
-   console.log(req.query);
+  // console.log(req.query);
   // console.log(req._parsedUrl);
   // console.log(req._parsedUrl.Url);
-  //get the filter params
-  console.log("------------");
-  console.log(req._parsedUrl.query);
+  // get the filter params
+  // console.log("------------");
+  // console.log(req._parsedUrl.query);
   //console.log(req.query["types_of_support"]);
 
   var params = req._parsedUrl.query;
   if(params){
     params = "?" + params.split("[]").join("%5B%5D");
   }else{
-    params ="";
+    params ="?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity&types_of_support%5B%5D=grant";
   }
+  //types_of_support[]
+  //https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity&types_of_support%5B%5D=grant
   // redirect to GOV>UK fund finder
   var url  = "https://www.gov.uk/business-finance-support"+ params;
   
-  console.log (url);
+  console.log("redirect to " + url);
   res.redirect(302, url);
   
   // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity
@@ -111,7 +113,7 @@ router.get('/test', function(req, res, next) {
   }
 
 
-  console.log(params);
+  // console.log(params);
   var checks = {};
 
   // loop through params and split out type and values
@@ -132,7 +134,6 @@ router.get('/test', function(req, res, next) {
     checks: checks
   });
  
-
 });
 
 
