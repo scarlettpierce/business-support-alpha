@@ -79,29 +79,39 @@ router.get('/results', function(req, res, next) {
 
   var params = req._parsedUrl.query;
   if(params){
-    params = params.split("[]").join("%5B%5D");
+    params = "?" + params.split("[]").join("%5B%5D");
+  }else{
+    params ="";
   }
   // redirect to GOV>UK fund finder
-  var url  = "https://www.gov.uk/business-finance-support?"+ params;
+  var url  = "https://www.gov.uk/business-finance-support"+ params;
   
   console.log (url);
-  res.redirect(301, url);
+  res.redirect(302, url);
   
   // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity
   // https://www.gov.uk/business-finance-support?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
   // http://localhost:3000/results?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
+  // http://localhost:3000/test?types_of_support%5B%5D=grant&types_of_support%5B%5D=loan
   // 
+
+
+});
   /////////////////////////////////////////////////////////////
-  /*
+
+
+router.get('/test', function(req, res, next) {
+ 
+  // render a local version of the results
   var len;
 
-  if(params){
-    params = params.split("&");
+  if(req._parsedUrl.query){
+    params = req._parsedUrl.query.split("&");
     len = params.length;
   }
 
 
-  //console.log(params);
+  console.log(params);
   var checks = {};
 
   // loop through params and split out type and values
@@ -109,6 +119,7 @@ router.get('/results', function(req, res, next) {
   for (var i=0;i<len;i++){
     var str = params[i];
     //console.log(str)
+    str = str.split("%5B%5D=").join("-");
     str = str.split("[]=").join("-");
     //console.log(str);
     checks[str] = true;
@@ -120,7 +131,7 @@ router.get('/results', function(req, res, next) {
     results: sampleResults,
     checks: checks
   });
- */
+ 
 
 });
 
