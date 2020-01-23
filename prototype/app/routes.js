@@ -4,25 +4,6 @@ const request = require('request');
 const _ = require('underscore');
 
 
-var types = [
-  null,
-  "Finance",
-  "Equity",
-  "Grant",
-  "Loan",
-  "Expertise and advice",
-  "Recognition award" 
-];
-/*
-https://www.gov.uk/business-finance-support?
-types_of_support%5B%5D=finance
-&types_of_support%5B%5D=equity
-&types_of_support%5B%5D=grant
-&types_of_support%5B%5D=loan
-&types_of_support%5B%5D=expertise-and-advice
-&types_of_support%5B%5D=recognition-award
-*/
-
 var sampleResults = [
   { 
     title:"AD:VENTURE - Leeds City Region",
@@ -89,21 +70,23 @@ router.get('/business-stage', function(req, res, next) {
 
 
 router.get('/results', function(req, res, next) {
-  
-/* 
-  var params = req._parsedUrl.query;
-  if(params){
-    params = "?" + params.split("[]").join("%5B%5D");
-  }else{
-    params ="?types_of_support%5B%5D=finance&types_of_support%5B%5D=equity&types_of_support%5B%5D=grant";
-  }
-  */
+
+  // TYPE OF SUPPORT CHECKBOXES
+  var types = [
+    null,
+    "finance",
+    "equity",
+    "grant",
+    "loan",
+    "expertise-and-advice",
+    "recognition-award" 
+  ];
   var params = "";
   var typeOfSupport = req.session.data['typeOfSupport'];
   var typeArray = []
   if(typeOfSupport){
     for (var i=0;i<typeOfSupport.length;i++){
-      typeArray[i] = types[typeOfSupport[i]].toLowerCase().split(" ").join("-");
+      typeArray[i] = types[typeOfSupport[i]];
       if (i===0){
         params = "?";
       }else{
@@ -111,10 +94,80 @@ router.get('/results', function(req, res, next) {
       }
       params += "types_of_support%5B%5D=" + typeArray[i];
     }
-    
   }
-  console.log(params)
-   // redirect to GOV>UK fund finder
+
+  // SIZE RADIO BUTTONS
+  var sizes = [null, 'under-10', 'between-10-and-249', 'between-250-and-500','over-500'];
+  var businessSize = req.session.data['businessSize'];
+  if(businessSize){
+    if (params.length===0){
+      params = "?";
+    }else{
+      params += "&"; 
+    }
+    params += "business_sizes%5B%5D=" + sizes[businessSize];
+  }
+
+  // STAGE RADIO BUTTONS
+  var stages = [null, 'not-yet-trading', 'start-up', 'established'];
+  var businessStage = req.session.data['businessStage'];
+  if(businessStage){
+     if (params.length===0){
+      params = "?";
+    }else{
+      params += "&"; 
+    }
+    params += "business_stages%5B%5D=" + stages[businessStage];
+  }
+
+  // INDUSTRY SELECT MENU
+  var industries = [
+    null,
+    'agriculture-and-food',
+    'business-and-finance',
+    'construction',
+    'education',
+    'health',
+    'hospitality-and-catering',
+    'information-technology-digital-and-creative',
+    'life-sciences',
+    'manufacturing',
+    'mining',
+    'real-estate-and-property',
+    'science-and-technology',
+    'service-industries',
+    'transport-and-distribution',
+    'travel-and-leisure',
+    'utilities-providers',
+    'wholesale-and-retail'
+  ];
+
+  var industryType = req.session.data['industryType'];
+  var industryArray = [];
+  var industryStr = "";
+  if(industryType){
+    industryStr = industries[ industryType ];
+    if (params.length===0){
+      params = "?";
+    }else{
+      params += "&"; 
+    }
+    params += "industries%5B%5D=" + industryStr;
+  }
+
+  // REGION RADIO BUTTONS
+  var region = req.session.data['region'].toLowerCase().split(" ").join("-");
+  if(region){
+      if (params.length===0){
+      params = "?";
+    }else{
+      params += "&"; 
+    }
+    params += "regions%5B%5D=" + region;
+  }
+  
+  
+   // redirect to GOV.UK fund finder with filters
   var url  = "https://www.gov.uk/business-finance-support"+ params;
   
   console.log("redirect to " + url);
