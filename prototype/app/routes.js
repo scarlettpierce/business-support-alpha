@@ -176,7 +176,7 @@ router.get('/results', function(req, res, next) {
 });
 
 
-
+// custom filtered result page
 router.get('/test', function(req, res, next) {
  
   // render a local version of the results
@@ -190,23 +190,48 @@ router.get('/test', function(req, res, next) {
 
   // console.log(params);
   var checks = {};
+  var facets = {
+    types_of_support:{title:"Of Type", listOfItems:[]},
+    business_stages:{title:"For Businesses Which Are", listOfItems:[]},
+    industries:{title:"For Businesses In", listOfItems:[]},
+    business_sizes:{title:"For Businesses With", listOfItems:[]},
+    regions:{title:"For Businesses In", listOfItems:[]},
+  };
 
   // loop through params and split out type and values
   // will id check boxes by id eg 'id="types_of_support-finance"'
   for (var i=0;i<len;i++){
     var str = params[i];
-    //console.log(str)
+    // catch str and url encodes 
     str = str.split("%5B%5D=").join("-");
     str = str.split("[]=").join("-");
-    //console.log(str);
+     // populate a checks var to pre-tick checkboxes
     checks[str] = true;
-    //checks.push({str:'true', name:str, checked:true});
+
+    // also build separate objects to loop through for the faceted chips
+    var filters = str.split("-");
+    var group = filters[0];
+    // remove group name
+    filters.shift();
+    // recombine
+    filters = filters.join("-");
+    facets[group].listOfItems.push(filters);
   }
+  //console.log(facets)
+  /* 
+  // sample content
+  types_of_support:finance,equity,grant,loan
+  business_sizes:between-10-and-249,between-250-and-500
+  business_stages:start-up,established
+  industries:education,health,hospitality-and-catering,information-technology-digital-and-creative,life-sciences,manufacturing,mining,science-and-technology
+  regions:east-midlands,eastern,london,north-east
+   */
 
   // then pass these to the pages to render checks and facets/chips
   res.render('results', {
     results: sampleResults,
-    checks: checks
+    checks: checks,
+    facets:facets
   });
  
 });

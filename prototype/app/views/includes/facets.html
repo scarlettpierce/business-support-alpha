@@ -3,91 +3,35 @@
         18 schemes
 
     </span>
-
+        
+ 
+    
+    
     <div class="facet-tags" data-module="track-click">
+
+        {% for group, value in facets %}
         <div class="facet-tags__group">
+ 
+            {% for item in value.listOfItems %}
             <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">Of Type</p>
+                <p class="facet-tags__preposition">
+                    {% if (loop.index==1) %}
+                        {{value.title}}
+                    {% else %}
+                        or 
+                    {% endif %}</p>
                 <div class="facet-tag">
-                    <p class="facet-tag__text">Loan</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter Loan"
-                        data-module="remove-filter-link" data-track-label="Loan" data-facet="types_of_support"
+                    <p class="facet-tag__text">{{item}}</p>
+                    <button type="button" class="facet-tag__remove" aria-label="Remove filter {{item}}"
+                        data-module="remove-filter-link" data-track-label="{{item}}" data-facet="types_of_support"
                         data-value="loan" data-name="">✕</button>
                 </div>
             </div>
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition"> or </p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">Expertise and advice</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter Expertise and advice"
-                        data-module="remove-filter-link" data-track-label="Expertise and advice"
-                        data-facet="types_of_support" data-value="expertise-and-advice" data-name="">✕</button>
-                </div>
-            </div>
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition"> or </p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">Recognition awards</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter Recognition awards"
-                        data-module="remove-filter-link" data-track-label="Recognition awards"
-                        data-facet="types_of_support" data-value="recognition-award" data-name="">✕</button>
-                </div>
-            </div>
+            {% endfor %}
+            
         </div>
-        <div class="facet-tags__group">
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">For Businesses Which Are</p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">Not yet trading</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter Not yet trading"
-                        data-module="remove-filter-link" data-track-label="Not yet trading" data-facet="business_stages"
-                        data-value="not-yet-trading" data-name="">✕</button>
-                </div>
-            </div>
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition"> or </p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">Start-ups (1-2 years trading)</p>
-                    <button type="button" class="facet-tag__remove"
-                        aria-label="Remove filter Start-ups (1-2 years trading)" data-module="remove-filter-link"
-                        data-track-label="Start-ups (1-2 years trading)" data-facet="business_stages"
-                        data-value="start-up" data-name="">✕</button>
-                </div>
-            </div>
-        </div>
-        <div class="facet-tags__group">
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">For Businesses In</p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">Manufacturing</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter Manufacturing"
-                        data-module="remove-filter-link" data-track-label="Manufacturing" data-facet="industries"
-                        data-value="manufacturing" data-name="">✕</button>
-                </div>
-            </div>
-        </div>
-        <div class="facet-tags__group">
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">For Businesses With</p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">10 to 249 employees</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter 10 to 249 employees"
-                        data-module="remove-filter-link" data-track-label="10 to 249 employees"
-                        data-facet="business_sizes" data-value="between-10-and-249" data-name="">✕</button>
-                </div>
-            </div>
-        </div>
-        <div class="facet-tags__group">
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">For Businesses In</p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">East Midlands</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter East Midlands"
-                        data-module="remove-filter-link" data-track-label="East Midlands" data-facet="regions"
-                        data-value="east-midlands" data-name="">✕</button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+
     </div>
 
 </div>
