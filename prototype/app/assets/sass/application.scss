@@ -323,3 +323,7 @@ a:hover {
     background: none;
     border: 0;
 }
+
+.govuk-header__container {
+    border-bottom: 10px solid govuk-colour("orange");
+}

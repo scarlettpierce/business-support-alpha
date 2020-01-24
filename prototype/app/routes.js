@@ -79,20 +79,28 @@ router.get('/results', function(req, res, next) {
     "grant",
     "loan",
     "expertise-and-advice",
-    "recognition-award" 
+    "recognition-award",
+
   ];
   var params = "";
   var typeOfSupport = req.session.data['typeOfSupport'];
   var typeArray = []
   if(typeOfSupport){
     for (var i=0;i<typeOfSupport.length;i++){
-      typeArray[i] = types[typeOfSupport[i]];
-      if (i===0){
-        params = "?";
+
+      if(typeOfSupport[i]==="7"){
+        params ="";
+        break;
       }else{
-        params += "&"; 
+        
+        typeArray[i] = types[typeOfSupport[i]];
+        if (i===0){
+          params = "?";
+        }else{
+          params += "&"; 
+        }
+        params += "types_of_support%5B%5D=" + typeArray[i];
       }
-      params += "types_of_support%5B%5D=" + typeArray[i];
     }
   }
 
@@ -146,17 +154,24 @@ router.get('/results', function(req, res, next) {
   var industryArray = [];
   var industryStr = "";
   if(industryType){
-    industryStr = industries[ industryType ];
-    if (params.length===0){
-      params = "?";
+    if(industryType==="0"){
+      // do nothing
     }else{
-      params += "&"; 
+      industryStr = industries[ industryType ];
+      if (params.length===0){
+        params = "?";
+      }else{
+        params += "&"; 
+      }
+      params += "industries%5B%5D=" + industryStr;
     }
-    params += "industries%5B%5D=" + industryStr;
   }
 
   // REGION RADIO BUTTONS
-  var region = req.session.data['region'].toLowerCase().split(" ").join("-");
+  var region = req.session.data['region']
+  if(region){
+    region =region.toLowerCase().split(" ").join("-");
+  }
   if(region){
       if (params.length===0){
       params = "?";
