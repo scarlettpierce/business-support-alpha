@@ -69,7 +69,7 @@ router.get('/business-stage', function(req, res, next) {
 });
 
 
-router.get('/summary', function(req, res, next) {
+router.get('/results', function(req, res, next) {
 
   // TYPE OF SUPPORT CHECKBOXES
   var types = [
@@ -95,8 +95,7 @@ router.get('/summary', function(req, res, next) {
         
         typeArray[i] = types[typeOfSupport[i]];
         if (i===0){
-          params = "";
-      //params = "?";
+          params = "?";
         }else{
           params += "&"; 
         }
@@ -110,8 +109,7 @@ router.get('/summary', function(req, res, next) {
   var businessSize = req.session.data['businessSize'];
   if(businessSize){
     if (params.length===0){
-      params = "";
-      //params = "?";
+      params = "?";
     }else{
       params += "&"; 
     }
@@ -123,8 +121,7 @@ router.get('/summary', function(req, res, next) {
   var businessStage = req.session.data['businessStage'];
   if(businessStage){
      if (params.length===0){
-      params = "";
-      //params = "?";
+      params = "?";
     }else{
       params += "&"; 
     }
@@ -162,8 +159,7 @@ router.get('/summary', function(req, res, next) {
     }else{
       industryStr = industries[ industryType ];
       if (params.length===0){
-        params = "";
-      //params = "?";
+        params = "?";
       }else{
         params += "&"; 
       }
@@ -178,8 +174,7 @@ router.get('/summary', function(req, res, next) {
   }
   if(region){
       if (params.length===0){
-      params = "";
-      //params = "?";
+      params = "?";
     }else{
       params += "&"; 
     }
@@ -187,34 +182,29 @@ router.get('/summary', function(req, res, next) {
   }
   
   
-  facets = getFacets(params);
-
-console.log('+++++++++++++')
-console.log(facets)
-    // then pass these to the pages to render checks and facets/chips
-    res.render('summary', {
-      facets:facets,
-      params:params
-    });
-   
-  });
-
-  router.get('/results', function(req, res, next) {
-    var params = req.session.data['params']
-    var url  = "https://www.gov.uk/business-finance-support?"+ params;
-    console.log("redirect to " + url);
-    res.send(url);
-/* 
-  // redirect to GOV.UK fund finder with filters
+   // redirect to GOV.UK fund finder with filters
+  var url  = "https://www.gov.uk/business-finance-support"+ params;
+  
+  console.log("redirect to " + url);
   res.redirect(302, url);
-   */
+  
 });
 
-global.getFacets = function (arr){
-  console.log("GET FACETS");
-  var params = arr.split("&");
-  console.log(params);
 
+// custom filtered result page
+router.get('/test', function(req, res, next) {
+ 
+  // render a local version of the results
+  var len;
+
+  if(req._parsedUrl.query){
+    params = req._parsedUrl.query.split("&");
+    len = params.length;
+  }
+
+
+  // console.log(params);
+  var checks = {};
   var facets = {
     types_of_support:{title:"Of Type", listOfItems:[]},
     business_stages:{title:"For Businesses Which Are", listOfItems:[]},
@@ -222,59 +212,6 @@ global.getFacets = function (arr){
     business_sizes:{title:"For Businesses With", listOfItems:[]},
     regions:{title:"For Businesses In", listOfItems:[]},
   };
-
-  var len = params.length;
-  // loop through params and split out type and values
-  // will id check boxes by id eg 'id="types_of_support-finance"'
-  for (var i=0;i<len;i++){
-    console.log(params[i])
-    var str = params[i];
-    // catch str and url encodes 
-    str = str.split("%5B%5D=").join("-");
-    str = str.split("[]=").join("-");
-
-    // build separate objects to loop through for the faceted chips
-    var filters = str.split("-");
-    var group = filters[0];
-    // remove group name
-    filters.shift();
-    // recombine
-    filters = filters.join("-");
-    console.log(group)
-    console.log(facets)
-    console.log(facets[group])
-    facets[group].listOfItems.push(filters);
-  }
-
-  console.log("--------------------------")
-  console.log(facets)
-  return facets
-  /* 
-  // sample content
-  types_of_support:finance,equity,grant,loan
-  business_sizes:between-10-and-249,between-250-and-500
-  business_stages:start-up,established
-  industries:education,health,hospitality-and-catering,information-technology-digital-and-creative,life-sciences,manufacturing,mining,science-and-technology
-  regions:east-midlands,eastern,london,north-east
-   */
-}
-// custom filtered result page
-router.get('/test', function(req, res, next) {
- 
-  // render a local version of the results
-  var len;
-  var facets;
-
-  if(req._parsedUrl.query){
-    params = req._parsedUrl.query.split("&");
-    len = params.length;
-    facets = getFacets(params);
-  }
-
-
-   console.log(params);
-   console.log(facets);
-  var checks = {};
 
   // loop through params and split out type and values
   // will id check boxes by id eg 'id="types_of_support-finance"'
@@ -285,8 +222,25 @@ router.get('/test', function(req, res, next) {
     str = str.split("[]=").join("-");
      // populate a checks var to pre-tick checkboxes
     checks[str] = true;
-  }
 
+    // also build separate objects to loop through for the faceted chips
+    var filters = str.split("-");
+    var group = filters[0];
+    // remove group name
+    filters.shift();
+    // recombine
+    filters = filters.join("-");
+    facets[group].listOfItems.push(filters);
+  }
+  //console.log(facets)
+  /* 
+  // sample content
+  types_of_support:finance,equity,grant,loan
+  business_sizes:between-10-and-249,between-250-and-500
+  business_stages:start-up,established
+  industries:education,health,hospitality-and-catering,information-technology-digital-and-creative,life-sciences,manufacturing,mining,science-and-technology
+  regions:east-midlands,eastern,london,north-east
+   */
 
   // then pass these to the pages to render checks and facets/chips
   res.render('results', {
