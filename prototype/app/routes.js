@@ -104,7 +104,7 @@ router.get('/summary', function(req, res, next) {
         typeArray[i] = types[typeOfSupport[i]];
         if (i===0){
           params = "";
-      //params = "?";
+          //params = "?";
         }else{
           params += "&"; 
         }
@@ -225,9 +225,7 @@ router.get('/summary', function(req, res, next) {
 });
 
 global.getFacets = function (arr){
-  console.log("GET FACETS");
   var params = arr.split("&");
-  console.log(params);
 
   var facets = {
     types_of_support:{title:"Of Type", listOfItems:[]},
@@ -241,7 +239,6 @@ global.getFacets = function (arr){
   // loop through params and split out type and values
   // will id check boxes by id eg 'id="types_of_support-finance"'
   for (var i=0;i<len;i++){
-    console.log(params[i])
     var str = params[i];
     // catch str and url encodes 
     str = str.split("%5B%5D=").join("-");
@@ -254,24 +251,12 @@ global.getFacets = function (arr){
     filters.shift();
     // recombine
     filters = filters.join("-");
-    console.log(group)
-    console.log(facets)
-    console.log(facets[group])
     facets[group].listOfItems.push(filters);
   }
 
-  console.log("--------------------------")
-  console.log(facets)
   return facets
-  /* 
-  // sample content
-  types_of_support:finance,equity,grant,loan
-  business_sizes:between-10-and-249,between-250-and-500
-  business_stages:start-up,established
-  industries:education,health,hospitality-and-catering,information-technology-digital-and-creative,life-sciences,manufacturing,mining,science-and-technology
-  regions:east-midlands,eastern,london,north-east
-   */
 }
+
 // custom filtered result page
 router.get('/test', function(req, res, next) {
  
@@ -285,9 +270,6 @@ router.get('/test', function(req, res, next) {
     facets = getFacets(params);
   }
 
-
-   console.log(params);
-   console.log(facets);
   var checks = {};
 
   // loop through params and split out type and values
@@ -310,26 +292,6 @@ router.get('/test', function(req, res, next) {
   });
  
 });
-
-
-/*
-// example request with params
-router.get('/business/:reference', function(req, res) {
-  var refID  = req.params.reference;
-  var target = {};
-  //loop through locations data
-  _.each(locations, function(element, index, list){
-    //console.log(element.FHRSID);
-
-    if(refID===element.FHRSID){
-      target = element;
-    }
-
-  })
-  res.send({target});
-}); 
-*/
-
 
 
 module.exports = router
