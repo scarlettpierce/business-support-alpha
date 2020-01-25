@@ -40,42 +40,97 @@ Finance and support for your business
 
       <p>Copy goes here...</p>
 
-      <div class="facet-tags" data-module="track-click">
+      <div>
 
-        {% for group, value in facets %}
-        <div class="facet-tags__group">
- 
-            {% for item in value.listOfItems %}
-            <div class="facet-tags__wrapper">
-                <p class="facet-tags__preposition">
-                    {% if (loop.index==1) %}
-                        {{value.title}}
-                    {% else %}
-                        or 
-                    {% endif %}</p>
-                <div class="facet-tag">
-                    <p class="facet-tag__text">{{item}}</p>
-                    <button type="button" class="facet-tag__remove" aria-label="Remove filter {{item}}"
-                        data-module="remove-filter-link" data-track-label="{{item}}" data-facet="{{group}}"
-                        data-value="{{item}}" data-name="">✕</button>
-                </div>
-            </div>
-            {% endfor %}
-            
-        </div>
-        {% endfor %}
-
-        <div>
-            
-            <form method="post" autocomplete="off" novalidate action="results">
-                <input type="hidden" id="custId" name="params" value="{{params}}">
-                <button class="govuk-button" data-module="govuk-button">
-                    Find resources
-                </button>
-            </form>
-        </div>
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Type of support
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {%  for item in display.types_of_support %}
+              {{ item }}<br/>
+              {% endfor %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="type-of-support">
+                Change<span class="govuk-visually-hidden"> type of support</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Size of business
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {%  for item in display.business_sizes %}
+              {{ item }}<br/>
+              {% endfor %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="business-size">
+                Change<span class="govuk-visually-hidden"> Size of business</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Stage of business 
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {%  for item in display.business_stages %}
+              {{ item }}<br/>
+              {% endfor %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="business-stage">
+                Change<span class="govuk-visually-hidden"> Stage of business</span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Type of work 
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {%  for item in display.industries %}
+              {{ item }}<br/>
+              {% endfor %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="industry">
+                Change<span class="govuk-visually-hidden"> type of work </span>
+              </a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Region
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {%  for item in display.regions %}
+              {{ item }}<br/>
+              {% endfor %}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="region">
+                Change<span class="govuk-visually-hidden"> Regions</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
 
     </div>
+
+    <div>    
+      <form method="post" autocomplete="off" novalidate action="results">
+          <input type="hidden" id="custId" name="params" value="{{params}}">
+          <button class="govuk-button" data-module="govuk-button">
+              Find resources
+          </button>
+      </form>
+    </div>
+
     </div>
     <div class="govuk-grid-column-one-third">
      
@@ -83,113 +138,4 @@ Finance and support for your business
   </div>
 
   
-  <div class="govuk-grid-row">
-    
-    <div class="govuk-grid-column-two-thirds">
-        {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
-
-        {{ govukSummaryList({
-          rows: [
-            {
-              key: {
-                text: "Type of Support"
-              },
-              value: {
-                text: "
-                 %for group, value in facets %
-                {% for item in value.listOfItems %}
-{{item}}
-                {% endfor %}
-                %endfor%
-                
-                "
-              },
-              actions: {
-                items: [
-                  {
-                    href: "type-of-support",
-                    text: "Change",
-                    visuallyHiddenText: "Type of Support"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Size of business"
-              },
-              value: {
-                text: "5 January 1978"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "business-size",
-                    text: "Change",
-                    visuallyHiddenText: "Size of businessh"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Stage of business"
-              },
-              value: {
-                html: "72 Guild Street<br>London<br>SE23 6FH"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "business-stage",
-                    text: "Change",
-                    visuallyHiddenText: "Stage of business"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Type of work"
-              },
-              value: {
-                html: '<p class="govuk-body">07700 900457</p><p class="govuk-body">sarah.phillips@example.com</p>'
-              },
-              actions: {
-                items: [
-                  {
-                    href: "industry",
-                    text: "Change",
-                    visuallyHiddenText: "Type of work"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Region"
-              },
-              value: {
-                html: '<p class="govuk-body">07700 900457</p><p class="govuk-body">sarah.phillips@example.com</p>'
-              },
-              actions: {
-                items: [
-                  {
-                    href: "region",
-                    text: "Change",
-                    visuallyHiddenText: "Region"
-                  }
-                ]
-              }
-            }
-          ]
-        }) }}
-    </div>
-    <div class="govuk-grid-column-one-third">
-        
-    </div>
-  </div>
-
-
-
 {% endblock %}

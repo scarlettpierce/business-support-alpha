@@ -70,7 +70,15 @@ router.get('/business-stage', function(req, res, next) {
 
 
 router.get('/summary', function(req, res, next) {
-
+  var facets = {};
+  // for the summary page have specific strings
+  var displayNames = {
+    types_of_support:[],
+    business_stages:[],
+    industries:[],
+    business_sizes:[],
+    regions:[],
+  };
   // TYPE OF SUPPORT CHECKBOXES
   var types = [
     null,
@@ -80,8 +88,8 @@ router.get('/summary', function(req, res, next) {
     "loan",
     "expertise-and-advice",
     "recognition-award",
-
   ];
+
   var params = "";
   var typeOfSupport = req.session.data['typeOfSupport'];
   var typeArray = []
@@ -101,6 +109,7 @@ router.get('/summary', function(req, res, next) {
           params += "&"; 
         }
         params += "types_of_support%5B%5D=" + typeArray[i];
+        displayNames.types_of_support.push(typeArray[i].toLowerCase().split("-").join(" "));
       }
     }
   }
@@ -116,6 +125,7 @@ router.get('/summary', function(req, res, next) {
       params += "&"; 
     }
     params += "business_sizes%5B%5D=" + sizes[businessSize];
+    displayNames.business_sizes.push(sizes[businessSize].toLowerCase().split("-").join(" "));
   }
 
   // STAGE RADIO BUTTONS
@@ -129,6 +139,7 @@ router.get('/summary', function(req, res, next) {
       params += "&"; 
     }
     params += "business_stages%5B%5D=" + stages[businessStage];
+    displayNames.business_stages.push(stages[businessStage].toLowerCase().split("-").join(" "));
   }
 
   // INDUSTRY SELECT MENU
@@ -168,13 +179,14 @@ router.get('/summary', function(req, res, next) {
         params += "&"; 
       }
       params += "industries%5B%5D=" + industryStr;
+      displayNames.industries.push(industryStr.toLowerCase().split("-").join(" "));
     }
   }
 
   // REGION RADIO BUTTONS
   var region = req.session.data['region']
   if(region){
-    region =region.toLowerCase().split(" ").join("-");
+    region = region;
   }
   if(region){
       if (params.length===0){
@@ -183,31 +195,33 @@ router.get('/summary', function(req, res, next) {
     }else{
       params += "&"; 
     }
-    params += "regions%5B%5D=" + region;
+    params += "regions%5B%5D=" + region.toLowerCase().split(" ").join("-");
+    displayNames.regions.push(region);
   }
   
-  
-  facets = getFacets(params);
+  if (params.length>0){
+    facets = getFacets(params);
+  }
 
-console.log('+++++++++++++')
-console.log(facets)
     // then pass these to the pages to render checks and facets/chips
     res.render('summary', {
       facets:facets,
+      display:displayNames,
+      copy:"copy<br/>goes<br/>here...",
       params:params
     });
    
+
   });
 
   router.get('/results', function(req, res, next) {
     var params = req.session.data['params']
     var url  = "https://www.gov.uk/business-finance-support?"+ params;
     console.log("redirect to " + url);
-    res.send(url);
-/* 
-  // redirect to GOV.UK fund finder with filters
-  res.redirect(302, url);
-   */
+    //res.send(url);
+    // redirect to GOV.UK fund finder with filters
+    res.redirect(302, url);
+  
 });
 
 global.getFacets = function (arr){
