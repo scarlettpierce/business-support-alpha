@@ -38,7 +38,20 @@ Finance and support for your business
         Find support for your business
       </h1>
 
-      <p>Copy goes here...</p>
+      <h2 class="govuk-heading-m">Copy goes here</h2>
+
+      <p>
+        The table below shows the options you have selected.
+        Click continue to see the relevant support options for these options.
+        You can also go back and change the selection.
+      </p>
+        
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit
+        esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident,
+        sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
 
       <div>
 
@@ -49,7 +62,7 @@ Finance and support for your business
             </dt>
             <dd class="govuk-summary-list__value">
               {%  for item in display.types_of_support %}
-              {{ item }}<br/>
+              {{ item | capitalize }}<br/>
               {% endfor %}
             </dd>
             <dd class="govuk-summary-list__actions">
@@ -64,7 +77,7 @@ Finance and support for your business
             </dt>
             <dd class="govuk-summary-list__value">
               {%  for item in display.business_sizes %}
-              {{ item }}<br/>
+              {{ item | capitalize }}<br/>
               {% endfor %}
             </dd>
             <dd class="govuk-summary-list__actions">
@@ -79,7 +92,7 @@ Finance and support for your business
             </dt>
             <dd class="govuk-summary-list__value">
               {%  for item in display.business_stages %}
-              {{ item }}<br/>
+              {{ item | capitalize }}<br/>
               {% endfor %}
             </dd>
             <dd class="govuk-summary-list__actions">
@@ -94,7 +107,7 @@ Finance and support for your business
             </dt>
             <dd class="govuk-summary-list__value">
               {%  for item in display.industries %}
-              {{ item }}<br/>
+              {{ item | capitalize }}<br/>
               {% endfor %}
             </dd>
             <dd class="govuk-summary-list__actions">
@@ -109,7 +122,7 @@ Finance and support for your business
             </dt>
             <dd class="govuk-summary-list__value">
               {%  for item in display.regions %}
-              {{ item }}<br/>
+              {{ item | capitalize }}<br/>
               {% endfor %}
             </dd>
             <dd class="govuk-summary-list__actions">
