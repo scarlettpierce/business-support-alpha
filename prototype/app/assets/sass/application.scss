@@ -325,5 +325,20 @@ a:hover {
 }
 
 .govuk-header__container {
-    border-bottom: 10px solid govuk-colour("orange");
+    color:#000;
+    border-bottom: 2px solid govuk-colour("orange");
+}
+
+.govuk-header {
+    background-color: #fff;
+}
+
+.govuk-header__link:link, .govuk-header__link:visited {
+    color:#000;
+}
+
+.app-related-items {
+    border-top: 2px solid 
+    #1d70b8;
+    padding-top: 10px;
 }

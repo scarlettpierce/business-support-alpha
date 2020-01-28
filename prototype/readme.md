@@ -10,3 +10,5 @@ All pages are in the `views` folder.
 
 The `routes.js` file is used to handle data from the forms before redirecting to the existing [Grow your Business](https://www.gov.uk/growing-your-business) pages on GOV.UK
 
+## Notes
+As the prototype is a sub-folder of the main repo, the heroku deployment is slightly different from the GDS example:

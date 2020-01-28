@@ -1,14 +1,13 @@
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
-{% extends "layout.html" %}
+{% extends "layout_unbranded.html" %}
 
 {% block pageTitle %}
 Finance and support for your business
 {% endblock %}
 
 {% block header %}
-  <!-- Blank header with no service name for the start page -->
-  {{ govukHeader({serviceName:serviceName}) }}
+  {% include "includes/header.html" %}
 {% endblock %}
 
 {% block beforeContent %}
