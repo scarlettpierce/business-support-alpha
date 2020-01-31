@@ -165,7 +165,8 @@ router.get('/summary', function(req, res, next) {
     console.log("GOT CODE " + cleaned)
     //dummy data
       displayNames.region =  `London (${cleaned})`;
-      displayNames.region_url = "lep.london/";
+      displayNames.region_name =  `London`;
+      displayNames.region_url = "https://lep.london/";
   }
     
   var businessType = req.session.data['businessType'];
