@@ -68,31 +68,58 @@ Finance and support for your business
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Type of support
+              You want to
             </dt>
             <dd class="govuk-summary-list__value">
-              {%  for item in display.types_of_support %}
-              {{ item | capitalize }}<br/>
-              {% endfor %}
+              
+              {{ display.aim | capitalize }}<br/>
+              
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="type-of-support">
-                Change<span class="govuk-visually-hidden"> type of support</span>
+              <a class="govuk-link" href="business-funding-aim">
+                Change<span class="govuk-visually-hidden">  what you need help with</span>
               </a>
             </dd>
           </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Region
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ display.region }}<br/>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="find-address">
+                Change<span class="govuk-visually-hidden"> Regions</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Type of business 
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ display.businessType }}<br/>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="business-type">
+                Change<span class="govuk-visually-hidden"> type of business </span>
+              </a>
+            </dd>
+          </div>
+
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Size of business
             </dt>
             <dd class="govuk-summary-list__value">
-              {%  for item in display.business_sizes %}
-              {{ item | capitalize }}<br/>
-              {% endfor %}
+              {{ display.business_sizes | capitalize }}<br/>
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="business-size">
-                Change<span class="govuk-visually-hidden"> Size of business</span>
+                Change<span class="govuk-visually-hidden"> size of business</span>
               </a>
             </dd>
           </div>
@@ -101,9 +128,7 @@ Finance and support for your business
               Stage of business 
             </dt>
             <dd class="govuk-summary-list__value">
-              {%  for item in display.business_stages %}
-              {{ item | capitalize }}<br/>
-              {% endfor %}
+              {{ display.business_stages | capitalize }}<br/>
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="business-stage">
@@ -111,42 +136,14 @@ Finance and support for your business
               </a>
             </dd>
           </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of work 
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {%  for item in display.industries %}
-              {{ item | capitalize }}<br/>
-              {% endfor %}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="industry">
-                Change<span class="govuk-visually-hidden"> type of work </span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Region
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {%  for item in display.regions %}
-              {{ item | capitalize }}<br/>
-              {% endfor %}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="region">
-                Change<span class="govuk-visually-hidden"> Regions</span>
-              </a>
-            </dd>
-          </div>
+          
+          
         </dl>
 
     </div>
 
     <div>    
-      <form method="post" autocomplete="off" novalidate action="results">
+      <form method="post" autocomplete="off" novalidate action="factsheet">
           <input type="hidden" id="custId" name="params" value="{{params}}">
           <button class="govuk-button" data-module="govuk-button">
             Find finance

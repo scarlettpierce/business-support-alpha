@@ -1,0 +1,40 @@
+      <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m govuk-!-font-size-19" id="subsection-title">
+          Related content 
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="#">
+                {{ display.aim | capitalize }}
+              </a>
+            </li>
+           <li>
+              <a href="#">
+                Employing staff in {{ display.region }}
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Get help for {{ display.businessType }}
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Something for {{ display.business_sizes }} people
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Exporting  for {{ display.business_stages | capitalize }} businesses
+              </a>
+            </li>
+
+            <li>
+              <a href="" class="govuk-!-font-weight-bold">
+                More (redirects...)<span class="govuk-visually-hidden">in Subsection</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>

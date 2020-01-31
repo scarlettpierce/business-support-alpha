@@ -1,0 +1,76 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% extends "layout_unbranded.html" %}
+
+{% block pageTitle %}
+Finance and support for your business
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/banner_alpha.html" %}
+{{ super() }}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="https://www.gov.uk">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/">Business and self-employed</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link">Factsheet</a>
+    </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        Resources for {{display.region}}
+      </h1>
+
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <a href='#'>Apply for a Start Up Loan for your business</a>
+    </div>
+  </div>
+
+  
+  <div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+      {% if not results.length %}
+      <p>No results found</p>
+
+      {% else %}
+
+
+      <ol class="document-list">
+        
+        {% for item in results %}
+        <li class="document-list__item">
+          <a class="document-list__item-title  document-list__item-link"  href="#">{{item.title}}</a>
+          <p class="document-list__item-description">{{item.description}}</p>
+        </li>
+        {% endfor %}
+        
+      </ol>
+      {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+        {% include 'includes/related_custom_content.html'%}
+    </div>
+  </div>
+
+
+
+{% endblock %}

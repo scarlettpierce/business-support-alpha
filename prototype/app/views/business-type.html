@@ -1,0 +1,112 @@
+{% extends "layout_unbranded.html" %}
+
+{% block pageTitle %}
+  Add your business size
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/banner_alpha.html" %}
+<a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="business-size">
+
+
+    <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+        
+        <legend class="govuk-fieldset__legend govuk-label--xl">
+          <h1 class="govuk-fieldset__heading">
+            <span class="govuk-caption-xl">Business Growth: Step 3 of 5</span> How is your business set up?
+          </h1>
+        </legend>
+
+
+      
+        <div class="govuk-radios">
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-1" name="businessType" type="radio" value="1">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-1">
+                Not yet trading
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-2" name="businessType" type="radio" value="2">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-2">
+                Sole Trader
+            </label>
+          </div>
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-3" name="businessType" type="radio" value="3">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-3">
+                Private Limited Company (LTD)
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-4" name="businessType" type="radio" value="4">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-4">
+                Public Limited Company (PLC)
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-5" name="businessType" type="radio" value="5">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-5">
+                Limited Liability Partnership (LLP)
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-6" name="businessType" type="radio" value="6">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-6">
+                Guarantee Company (Non Profit)
+            </label>
+          </div>
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="businessType-7" name="businessType" type="radio" value="7">
+            <label class="govuk-label govuk-radios__label govuk-label--s" for="businessType-7">
+                Limited Partnership
+            </label>
+          </div>
+        
+        </div>
+        </fieldset>
+      
+      </div>
+      
+      <button type="submit" class="govuk-button" id="submit">
+        Continue
+      </button>
+      
+      </form>
+      <!-- <p>
+        If you are not sure of exact nature of your question press continue and all possible options will be shown.
+        You can come back and changed the selection later.
+      </p> -->
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}

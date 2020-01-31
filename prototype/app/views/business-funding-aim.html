@@ -1,0 +1,103 @@
+{% extends "layout_unbranded.html" %}
+
+{% block pageTitle %}
+  What is your finding for?
+{% endblock %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+{% include "includes/banner_alpha.html" %}
+  <a href="javascript:window.history.go(-1)" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+     
+
+        
+<form method="post" autocomplete="off" novalidate action="find-address">
+    <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+        
+        <legend class="govuk-fieldset__legend govuk-label--xl">
+          <h1 class="govuk-fieldset__heading">
+            <span class="govuk-caption-xl">Business Growth: Step 1 of 5</span> What do you need help with?
+          </h1>
+        </legend>
+        
+        <div class="govuk-radios">
+
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-1" name="aim" type="radio" value="1">
+            <label class="govuk-label govuk-radios__label" for="aim-1">
+              Buy new equipment
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-2" name="aim" type="radio" value="2">
+            <label class="govuk-label govuk-radios__label" for="aim-2">
+              Get new premises
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-3" name="aim" type="radio" value="3">
+            <label class="govuk-label govuk-radios__label" for="aim-3">
+              Hire new staff
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-4" name="aim" type="radio" value="4">
+            <label class="govuk-label govuk-radios__label" for="aim-4">
+              Research and Innovation
+            </label>
+          </div>
+
+          
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-5" name="aim" type="radio" value="5">
+            <label class="govuk-label govuk-radios__label" for="aim-5">
+              Market our products
+            </label>
+          </div> 
+             
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="aim-6" name="aim" type="radio" value="6">
+            <label class="govuk-label govuk-radios__label" for="aim-6">
+              Improve cash flow
+            </label>
+          </div>
+
+        </div>
+        </fieldset>
+      
+      </div>
+
+      <button type="submit" class="govuk-button" id="submit">
+        Continue
+      </button>
+      
+      </form>
+      
+      
+    </div>
+
+    
+    <div class="govuk-grid-column-one-third">
+      {% include 'includes/related_content.html'%}
+    </div>
+
+  </div>
+{% endblock %}

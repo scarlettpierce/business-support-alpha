@@ -3,7 +3,7 @@ const router = express.Router();
 const request = require('request');
 const _ = require('underscore');
 
-
+const MYSOCIETY_API_URL = "https://mapit.mysociety.org/postcode/";
 var sampleResults = [
   { 
     title:"AD:VENTURE - Leeds City Region",
@@ -69,16 +69,115 @@ router.get('/business-stage', function(req, res, next) {
 });
 
 
+// for the summary page have specific strings
+var displayNames = {
+  types_of_support:[],
+  business_stages:"",
+  industries:[],
+  business_sizes:"",
+  regions:[],
+  aim:""
+};
+
 router.get('/summary', function(req, res, next) {
   var facets = {};
-  // for the summary page have specific strings
-  var displayNames = {
-    types_of_support:[],
-    business_stages:[],
-    industries:[],
-    business_sizes:[],
-    regions:[],
-  };
+
+
+  var params = "";
+
+  var aims = [
+    null,
+    "Buy new equipment",
+    "Set up new premises",
+    "Hire new staff",
+    "Research and Innovation",
+    "Market our products",
+    "Improve cash flow",
+  ];
+/* 
+  to research and create a product; 
+  to buy technology or equipment; 
+  to help with cash flow; 
+  to increase production; 
+  to set up a new premises; 
+  to employ more people; 
+  to market our products or services
+ */
+  var legalStructure = [
+    null,
+    "Not yet trading",
+    "Sole Trader",
+    "Private Limited Company (LTD)",
+    "Public Limited Company (PLC)",
+    "Limited Liability Partnership (LLP)",
+    "Guarantee Company (Non Profit)",
+    "Limited Partnership" 
+  ];
+
+    
+  var aim = req.session.data['aim'];
+  console.log('summary');
+  console.log(aim);
+  console.log(aims[aim]);
+  if(aim){
+      /* if (i===0){
+        params = "";
+        //params = "?";
+      }else{
+        params += "&"; 
+      } */
+     // params += "types_of_support%5B%5D=" + typeArray[i];
+      displayNames.aim = aims[aim];
+  }
+    
+  //////////////////////////////
+
+/* 
+  var businessType = req.session.data['businessType'];
+  console.log(businessType);
+  console.log(legalStructure[businessType]);
+  if(businessType){
+      displayNames.region = "London";
+      displayNames.region_url = "lep.london/";
+  }
+    
+  var postcode = req.session.data['postcode'];
+  console.log(postcode);
+
+  if(postcode){
+    var cleaned = postcode.split('%20').join('');
+    cleaned = cleaned.split(' ').join('');
+    console.log("GOT CODE " + cleaned)
+    displayNames.region =;
+  }
+
+
+ */
+
+  //////////////////////////////
+  var postcode = req.session.data['postcode'];
+  console.log(postcode);
+ 
+  if(postcode){
+    var cleaned = postcode.split('%20').join('');
+    cleaned = cleaned.split(' ').join('');
+    cleaned = cleaned.toUpperCase();
+    console.log("GOT CODE " + cleaned)
+    //dummy data
+      displayNames.region =  `London (${cleaned})`;
+      displayNames.region_url = "lep.london/";
+  }
+    
+  var businessType = req.session.data['businessType'];
+  console.log(businessType);
+  console.log(legalStructure[businessType]);
+  if(businessType){
+      displayNames.businessType = legalStructure[businessType];
+  }
+
+  
+
+/* 
   // TYPE OF SUPPORT CHECKBOXES
   var types = [
     null,
@@ -90,7 +189,6 @@ router.get('/summary', function(req, res, next) {
     "recognition-award",
   ];
 
-  var params = "";
   var typeOfSupport = req.session.data['typeOfSupport'];
   var typeArray = []
   if(typeOfSupport){
@@ -113,6 +211,8 @@ router.get('/summary', function(req, res, next) {
       }
     }
   }
+ */
+
 
   // SIZE RADIO BUTTONS
   var sizes = [null, 'under-10', 'between-10-and-249', 'between-250-and-500','over-500'];
@@ -125,7 +225,7 @@ router.get('/summary', function(req, res, next) {
       params += "&"; 
     }
     params += "business_sizes%5B%5D=" + sizes[businessSize];
-    displayNames.business_sizes.push(sizes[businessSize].toLowerCase().split("-").join(" "));
+    displayNames.business_sizes = sizes[businessSize].toLowerCase().split("-").join(" ");
   }
 
   // STAGE RADIO BUTTONS
@@ -139,7 +239,7 @@ router.get('/summary', function(req, res, next) {
       params += "&"; 
     }
     params += "business_stages%5B%5D=" + stages[businessStage];
-    displayNames.business_stages.push(stages[businessStage].toLowerCase().split("-").join(" "));
+    displayNames.business_stages = stages[businessStage].toLowerCase().split("-").join(" ");
   }
 
   // INDUSTRY SELECT MENU
@@ -257,6 +357,20 @@ global.getFacets = function (arr){
   return facets
 }
 
+
+router.get('/factsheet', function(req, res, next) {
+
+  // then pass these to the pages to render checks and facets/chips
+  res.render('factsheet', {
+    results: sampleResults,
+    display:displayNames
+  });
+
+
+});
+
+
+
 // custom filtered result page
 router.get('/test', function(req, res, next) {
  
@@ -292,6 +406,84 @@ router.get('/test', function(req, res, next) {
   });
  
 });
+
+
+router.get('/postcode', function(req, res, next) {
+
+  //console.log(req.query)
+  //console.log(req.query.postcode)
+
+
+/*   if(req._parsedUrl.query){
+    params = req._parsedUrl.query.split("&");
+    len = params.length;
+    facets = getFacets(params);
+  } */
+
+  if(req.query.postcode){
+    var str = req.query.postcode;
+    var cleaned = str.split('%20').join('');
+    cleaned = cleaned.split(' ').join('');
+    //console.log("GOT CODE " + cleaned)
+
+    //https://mapit.mysociety.org/postcode/SW1A1AA
+
+
+    request(MYSOCIETY_API_URL + cleaned, {
+      method: "GET",
+      headers: {
+          //'Authorization': process.env.EPC_API_KEY,
+          'Accept': 'application/json'
+        }
+      }, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            if(body) {
+              dataset = JSON.parse(body);
+              console.log(dataset);
+
+              res.send(dataset);
+/* 
+              // sort by second property then first property
+              // sort by house number as main order then flat number
+              var sortedArray = _.chain(dataset.rows)
+                .sortBy('address1')
+                .sortBy('address2')
+                .value();
+
+              // loop through results and build a simple array
+              var arr = [];
+              for (var i=0;i<sortedArray.length;i++){
+                arr[i] = {
+                      "reference": sortedArray[i]['certificate-hash'],
+                      "type": sortedArray[i]['property-type'],
+                      "address": sortedArray[i].address +', '+ dataset.rows[i].postcode,
+                      "category": sortedArray[i]['current-energy-rating']
+                  }
+              }
+
+              res.render('find-a-report/results', {
+                addresses: arr
+              });
+ */
+            } else {
+              /* 
+              res.render('find-a-report/results', {
+                addresses: []
+              });
+ */
+            }
+          } else {
+            res.send('error');
+            //res.redirect('/error');
+          }
+      });
+ 
+  }else{
+    res.send('no data');
+
+  }
+});
+
 
 
 module.exports = router
