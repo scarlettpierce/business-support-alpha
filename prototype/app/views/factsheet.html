@@ -59,7 +59,22 @@ Finance and support for your business
         {% for item in results %}
         <li class="document-list__item">
           <a class="document-list__item-title  document-list__item-link"  href="#">{{item.title}}</a>
+          {% if item.who %}
+            <p class="document-list__item-description">Who: 
+              {% for list in item.who %}
+                {{list}}, 
+              {% endfor %}
+            </p>
+          {% endif %}
+          {% if item.eligibility %}
+          <p class="document-list__item-description">Eligibility: {{item.eligibility}}</p>
+          {% endif %}
           <p class="document-list__item-description">{{item.description}}</p>
+          <p class="document-list__item-description">Website: <a href="{{item.website}}" target="_blank">{{item.website}}</a></p>
+          <p class="document-list__item-description">Telephone: {{item.telephone}}</p>
+          {% if item.email %}
+          <p class="document-list__item-description">Email: <a href="mailto:{{item.email}}">{{item.email}}</a></p>
+          {% endif %}
         </li>
         {% endfor %}
         
