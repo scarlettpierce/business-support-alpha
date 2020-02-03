@@ -361,14 +361,11 @@ global.getFacets = function (arr){
 
 router.get('/factsheet', function(req, res, next) {
  
-  console.log(res.app.locals.data);
-  console.log('-----');
   // then pass these to the pages to render checks and facets/chips
   res.render('factsheet', {
     results: res.app.locals.data,
     display:displayNames
   });
-
 
 });
 
