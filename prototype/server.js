@@ -342,3 +342,10 @@ console.log('\nGOV.UK Prototype Kit v' + releaseVersion)
 console.log('\nNOTICE: the kit is for building prototypes, do not use it for production services.')
 
 module.exports = app
+
+/*
+  Load data from JSON.
+*/
+var data = JSON.parse(fs.readFileSync(__dirname + '/app/data/cornwall.json').toString());
+console.log(data)
+app.locals.data = data.factsheet;

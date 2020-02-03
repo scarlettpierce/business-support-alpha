@@ -164,9 +164,9 @@ router.get('/summary', function(req, res, next) {
     cleaned = cleaned.toUpperCase();
     console.log("GOT CODE " + cleaned)
     //dummy data
-      displayNames.region =  `London (${cleaned})`;
-      displayNames.region_name =  `London`;
-      displayNames.region_url = "https://lep.london/";
+      displayNames.region =  `Cornwall (${cleaned})`;
+      displayNames.region_name =  `Cornwall`;
+      displayNames.region_url = "https://www.cioslep.com/";
   }
     
   var businessType = req.session.data['businessType'];
@@ -360,10 +360,12 @@ global.getFacets = function (arr){
 
 
 router.get('/factsheet', function(req, res, next) {
-
+ 
+  console.log(res.app.locals.data);
+  console.log('-----');
   // then pass these to the pages to render checks and facets/chips
   res.render('factsheet', {
-    results: sampleResults,
+    results: res.app.locals.data,
     display:displayNames
   });
 
