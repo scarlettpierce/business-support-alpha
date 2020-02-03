@@ -45,7 +45,7 @@
           <div class="govuk-radios">
             
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="businessStage-1" name="businessStage" type="radio" value="1">
+              <input class="govuk-radios__input" id="businessStage-1" name="businessStage" type="radio" value="1" {{ checked("businessStage", "1") }}>
               <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-1">
                 Not yet trading
               </label>
@@ -53,7 +53,7 @@
             
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="businessStage-2" name="businessStage" type="radio" value="2">
+              <input class="govuk-radios__input" id="businessStage-2" name="businessStage" type="radio" value="2" {{ checked("businessStage", "2") }}>
               <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-2">
                 Start-ups (1-2 years trading)
               </label>
@@ -61,7 +61,7 @@
             
 
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="businessStage-3" name="businessStage" type="radio" value="3">
+              <input class="govuk-radios__input" id="businessStage-3" name="businessStage" type="radio" value="3" {{ checked("businessStage", "3") }}>
               <label class="govuk-label govuk-radios__label govuk-label--s" for="businessStage-3">
                 Established
               </label>
